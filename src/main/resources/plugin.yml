@@ -1,0 +1,4 @@
+name: "ItemEditor"
+main: "com.github.wyrdix.ItemEditorPlugin"
+version: "0.0.1"
+author: "Wyrdix"
