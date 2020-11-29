@@ -6,7 +6,7 @@
 
     <groupId>Wyrdix</groupId>
     <artifactId>ItemEditor</artifactId>
-    <version>0.0.4</version>
+    <version>0.1.0</version>
 
     <repositories>
         <!-- This adds the Spigot Maven repository to the build -->
