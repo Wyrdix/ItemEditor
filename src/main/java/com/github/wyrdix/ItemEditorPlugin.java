@@ -12,6 +12,7 @@ public class ItemEditorPlugin extends JavaPlugin {
     getLogger().info("ItemEditor is enabling ...");
     invManager = new InventoryManager(this);
     invManager.init();
+    new EditItemCommand().register();
     getLogger().info("ItemEditor is now enabled and may work properly !");
   }
 
