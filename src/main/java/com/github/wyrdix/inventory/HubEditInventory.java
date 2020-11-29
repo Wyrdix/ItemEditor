@@ -75,7 +75,7 @@ public class HubEditInventory extends BukkitRunnable implements InventoryProvide
   private final TextComponent name_writing_comp =
           new TextComponent("§7Write in the chat the name (or && to remove it)");
   private final TextComponent name_writing_stop_comp =
-          new TextComponent("§cYou don't have written something, action cancelled");
+          new TextComponent("§cYou doesn't have written something, action cancelled");
 
   private HubEditInventory() {
     Bukkit.getPluginManager().registerEvents(this, ItemEditorPlugin.getInstance());
@@ -96,15 +96,14 @@ public class HubEditInventory extends BukkitRunnable implements InventoryProvide
 
     contents.set(SlotPos.of(3, 2), ClickableItem.empty(ENCHANT));
     contents.set(
-            SlotPos.of(2, 6),
+            SlotPos.of(2, 5),
             ClickableItem.of(
                     NAME,
                     (s) -> {
                       name_writers.put(player, System.currentTimeMillis());
                       INVENTORY.close(player);
-                      player.spigot().sendMessage(ChatMessageType.ACTION_BAR, name_writing_comp);
                     }));
-    contents.set(SlotPos.of(3, 7), ClickableItem.empty(LORE));
+    contents.set(SlotPos.of(3, 6), ClickableItem.empty(LORE));
   }
 
   public void update(Player player, InventoryContents contents) {
