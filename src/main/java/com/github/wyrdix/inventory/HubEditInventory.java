@@ -94,7 +94,11 @@ public class HubEditInventory extends BukkitRunnable implements InventoryProvide
     PlayerInventory inv = player.getInventory();
     contents.setProperty("item", inv.getItemInMainHand());
 
-    contents.set(SlotPos.of(3, 2), ClickableItem.empty(ENCHANT));
+    contents.set(
+            SlotPos.of(3, 2),
+            ClickableItem.of(
+                    ENCHANT,
+                    (e) -> EnchantmentEditInventory.open(player)));
     contents.set(
             SlotPos.of(2, 5),
             ClickableItem.of(
