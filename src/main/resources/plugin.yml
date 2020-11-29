@@ -1,6 +1,6 @@
 name: "ItemEditor"
 main: "com.github.wyrdix.ItemEditorPlugin"
-version: "0.0.3"
+version: "0.0.4"
 author: "Wyrdix"
 default-permission: op
 commands:

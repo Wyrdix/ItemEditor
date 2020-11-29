@@ -103,7 +103,7 @@ public class HubEditInventory extends BukkitRunnable implements InventoryProvide
                       name_writers.put(player, System.currentTimeMillis());
                       INVENTORY.close(player);
                     }));
-    contents.set(SlotPos.of(3, 6), ClickableItem.empty(LORE));
+    contents.set(SlotPos.of(3, 6), ClickableItem.of(LORE, (e) -> LoreEditInventory.open(player)));
   }
 
   public void update(Player player, InventoryContents contents) {
