@@ -1,7 +1,7 @@
 package com.github.wyrdix.inventory;
 
-import com.github.wyrdix.EnchantmentIcon;
 import com.github.wyrdix.ItemEditorPlugin;
+import com.github.wyrdix.configuration.ench.EnchantmentIcon;
 import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.*;

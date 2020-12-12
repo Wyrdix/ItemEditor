@@ -1,4 +1,4 @@
-package com.github.wyrdix;
+package com.github.wyrdix.configuration.ench;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -7,7 +7,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.bukkit.enchantments.Enchantment.*;
 
-public enum EnchantmentIcon {
+public enum EnchantmentIcon implements EnchIcon {
   PROTECTION(PROTECTION_ENVIRONMENTAL, Material.IRON_CHESTPLATE, "§7Protection"),
   FIRE_PROTECTION(PROTECTION_FIRE, Material.FIREBALL, "§7Fire Protection"),
   FEATHER_FALLING(PROTECTION_FALL, Material.HAY_BLOCK, "§7Feather Falling"),
@@ -41,19 +41,29 @@ public enum EnchantmentIcon {
   CURSE_OF_BINDING(BINDING_CURSE, Material.BOOK_AND_QUILL, "§7Curse Of Binding"),
   CURSE_OF_VANISHING(VANISHING_CURSE, Material.STAINED_GLASS_PANE, 0, "§7Curse Of Vanishing"),
   ;
-  private final Enchantment enchantment;
-  private final ItemStack icon;
+  private final EnchIconImpl defIcon;
+  private Enchantment enchantment;
+  private Material material;
+  private short data;
+  private String enchName;
+  private ItemStack icon;
 
   EnchantmentIcon(Enchantment enchantment, Material material, String name) {
     this(enchantment, material, 0, name);
   }
 
-  EnchantmentIcon(Enchantment enchantment, Material material, int data, String name) {
+  EnchantmentIcon(Enchantment enchantment, Material material, int data, String enchName) {
 
     this.enchantment = enchantment;
+    this.material = material;
+    this.data = (short) data;
+    this.enchName = enchName;
+
+    defIcon = new EnchIconImpl(name(), enchName, enchantment, material, this.data);
+
     this.icon = new ItemStack(material, 1, (short) data);
     ItemMeta meta = icon.getItemMeta();
-    meta.setDisplayName(name);
+    meta.setDisplayName(enchName);
     icon.setItemMeta(meta);
   }
 
@@ -63,5 +73,37 @@ public enum EnchantmentIcon {
 
   public Enchantment getEnchantment() {
     return enchantment;
+  }
+
+  @Override
+  public String enchantName() {
+    return enchName;
+  }
+
+  @Override
+  public Enchantment enchantment() {
+    return enchantment;
+  }
+
+  @Override
+  public Material material() {
+    return material;
+  }
+
+  @Override
+  public short data() {
+    return data;
+  }
+
+  public EnchIconImpl getDefIcon() {
+    return defIcon;
+  }
+
+  public void set(EnchIcon icon) {
+    enchantment = icon.enchantment();
+    material = icon.material();
+    data = icon.data();
+    enchName = icon.enchantName();
+    this.icon = icon.getIcon();
   }
 }

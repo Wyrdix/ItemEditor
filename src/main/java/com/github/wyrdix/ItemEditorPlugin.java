@@ -1,20 +1,31 @@
 package com.github.wyrdix;
 
+import com.github.wyrdix.configuration.ench.EnchIconConfiguration;
 import fr.minuskube.inv.InventoryManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+
 public class ItemEditorPlugin extends JavaPlugin {
 
-  private InventoryManager invManager;
+    private InventoryManager invManager;
 
-  @Override
-  public void onEnable() {
-    getLogger().info("ItemEditor is enabling ...");
-    invManager = new InventoryManager(this);
-    invManager.init();
-    new EditItemCommand().register();
-    getLogger().info("ItemEditor is now enabled and may work properly !");
-  }
+    @Override
+    public void onEnable() {
+        getLogger().info("ItemEditor is enabling ...");
+        if (getDataFolder().mkdir()) {
+            getLogger().info("Create config folder");
+        }
+        invManager = new InventoryManager(this);
+        invManager.init();
+        new EditItemCommand().register();
+        try {
+            new EnchIconConfiguration("enchIcon.yml").read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        getLogger().info("ItemEditor is now enabled and may work properly !");
+    }
 
   @Override
   public void onDisable() {
